@@ -22,7 +22,9 @@ JNIEXPORT jint JNICALL Java_com_zw_mediatools_MediaTools_native_1exec
 
     return 0;
 }
-
+// https://www.jianshu.com/p/fe84413a140f
+// https://www.codeleading.com/article/4810704573/
+// https://www.cxyzjd.com/article/u013752202/80557556
 /*
  * Class:     com_zw_mediatools_MediaTools
  * Method:    play
@@ -50,6 +52,12 @@ Java_com_zw_mediatools_MediaTools_play(JNIEnv *env, jclass jclazz, jstring jstr_
         return;
     }
 
+    AVDictionary *avDictionary = avFormatContext->metadata;
+    AVDictionaryEntry *t = nullptr;
+    while (t = av_dict_get(avDictionary, "", t, AV_DICT_IGNORE_SUFFIX)) {
+        LOGI("AVDictionary key: %s,value: %s", t->key, t->value);
+    }
+
     int videoIndex = -1;
     int audioIndex = -1;
     for (int i = 0; i < avFormatContext->nb_streams; i++) {
@@ -71,6 +79,9 @@ Java_com_zw_mediatools_MediaTools_play(JNIEnv *env, jclass jclazz, jstring jstr_
     }
 
     LOGI("videoIndex: %d,audioIndex: %d", videoIndex, audioIndex);
+
+    AVCodecParameters *avCodecParameters = avFormatContext->streams[videoIndex]->codecpar;
+    AVCodec *video_codec = avcodec_find_decoder(avCodecParameters->codec_id);
 
     env->ReleaseStringUTFChars(jstr_url, str_url);
 }
