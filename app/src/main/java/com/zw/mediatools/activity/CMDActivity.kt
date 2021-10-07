@@ -1,8 +1,9 @@
-package com.zw.mediatools
+package com.zw.mediatools.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import com.zw.mediatools.R
 import kotlinx.android.synthetic.main.activity_cmd.*
 
 class CMDActivity : AppCompatActivity(), View.OnClickListener {

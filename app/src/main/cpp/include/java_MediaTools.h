@@ -15,6 +15,14 @@ extern "C" {
 JNIEXPORT jint JNICALL Java_com_zw_mediatools_MediaTools_native_1exec
   (JNIEnv *, jclass, jstring);
 
+/*
+ * Class:     com_zw_mediatools_MediaTools
+ * Method:    play
+ * Signature: (Ljava/lang/String;)V
+ */
+JNIEXPORT void JNICALL Java_com_zw_mediatools_MediaTools_play
+  (JNIEnv *, jclass, jstring);
+
 #ifdef __cplusplus
 }
 #endif
